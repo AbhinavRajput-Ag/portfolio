@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhinav Rajput</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a18;
+    --muted: #6b6b66;
+    --faint: #e8e6df;
+    --bg: #f7f5ef;
+    --white: #ffffff;
+    --accent: #2d5a3d;
+    --accent-light: #e8f0ea;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --mono: 'DM Mono', monospace;
+    --sans: 'Lato', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 4rem;
+    background: rgba(247, 245, 239, 0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--faint);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    text-decoration: none;
+    text-transform: lowercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-inner {
+    max-width: 680px;
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.9s ease forwards 0.2s;
+  }
+
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  .btn-primary:hover {
+    background: var(--accent);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--faint);
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--ink);
+  }
+
+  /* SECTION COMMON */
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 6rem 4rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 3.5rem;
+    border-bottom: 1px solid var(--faint);
+    padding-bottom: 1.25rem;
+  }
+
+  .section-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--muted);
+    margin-bottom: 1rem;
+    font-size: 0.975rem;
+  }
+
+  .domain-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .domain-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.875rem 1rem;
+    background: var(--white);
+    border: 1px solid var(--faint);
+    border-radius: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .domain-item:hover { border-color: var(--accent); }
+
+  .domain-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .domain-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.03em;
+  }
+
+  .domain-desc {
+    font-size: 12px;
+    color: var(--muted);
+    margin-left: auto;
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5px;
+    background: var(--faint);
+    border: 1.5px solid var(--faint);
+  }
+
+  .project-card {
+    background: var(--white);
+    padding: 2rem 2rem 2.5rem;
+    position: relative;
+    transition: background 0.2s;
+    cursor: default;
+  }
+
+  .project-card:hover { background: var(--accent-light); }
+
+  .project-card.featured {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .project-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .project-domain {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+
+  .project-year {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .project-card h3 {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .project-card p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    border: 1px solid var(--faint);
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink);
+    text-decoration: none;
+    margin-top: 1.25rem;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+
+  .project-link:hover { color: var(--accent); }
+
+  .project-link-arrow {
+    display: inline-block;
+    transition: transform 0.2s;
+  }
+
+  .project-link:hover .project-link-arrow { transform: translateX(3px); }
+
+  .featured-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    border: 1px solid var(--faint);
+    border-radius: 2px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    background: var(--bg);
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .featured-visual svg {
+    opacity: 0.3;
+  }
+
+  /* CONTACT */
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-text h2 {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .contact-text p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+
+  .contact-email {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .contact-email:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .socials {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--faint);
+    border: 1.5px solid var(--faint);
+  }
+
+  .social-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 1.25rem;
+    background: var(--white);
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .social-row:hover { background: var(--accent-light); }
+
+  .social-name {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .social-handle {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--faint);
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  footer p {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    section { padding: 4rem 1.5rem; }
+    .about-grid,
+    .contact-wrap { grid-template-columns: 1fr; gap: 2rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
+    .featured-visual { display: none; }
+    footer { flex-direction: column; gap: 0.5rem; padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">ar /</a>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">builder · researcher · maker</div>
+    <h1>Abhinav<br><em>Rajput</em></h1>
+    <p class="hero-desc">
+      Self-taught developer working across domains — from agricultural infrastructure to software systems. Interested in technology as public good.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">view projects</a>
+      <a href="#contact" class="btn btn-ghost">get in touch</a>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header fade-in">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About</h2>
+  </div>
+  <div class="about-grid fade-in">
+    <div class="about-text">
+      <p>
+        Based in Bhopal, Madhya Pradesh. I build things that matter — systems, platforms, and tools designed with a long view in mind.
+      </p>
+      <p>
+        My work spans multiple domains. I approach problems by going deep on first principles, learning what's needed, and building without the shortcuts that create debt later.
+      </p>
+      <p>
+        Currently focused on digital public infrastructure for India — thinking about what it means to build technology for people who haven't been centered in it.
+      </p>
+    </div>
+    <div class="domain-list">
+      <div class="domain-item">
+        <div class="domain-dot"></div>
+        <span class="domain-label">Infrastructure</span>
+        <span class="domain-desc">public systems · APIs</span>
+      </div>
+      <div class="domain-item">
+        <div class="domain-dot"></div>
+        <span class="domain-label">Full-stack dev</span>
+        <span class="domain-desc">Python · React · SQL</span>
+      </div>
+      <div class="domain-item">
+        <div class="domain-dot"></div>
+        <span class="domain-label">Agriculture tech</span>
+        <span class="domain-desc">FPO systems · rural UX</span>
+      </div>
+      <div class="domain-item">
+        <div class="domain-dot"></div>
+        <span class="domain-label">Research</span>
+        <span class="domain-desc">policy · field study</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header fade-in">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Projects</h2>
+  </div>
+  <div class="projects-grid fade-in">
+
+    <!-- Featured -->
+    <div class="project-card featured">
+      <div>
+        <div class="project-meta">
+          <span class="project-domain">Agriculture · Infrastructure</span>
+          <span class="project-year">2024–present</span>
+        </div>
+        <h3>Prithvi</h3>
+        <p>
+          An agricultural operating system conceived as national digital public infrastructure for India — modeled on the public-good ethos of UPI. Targets Farmer Producer Organizations as the primary layer for reaching farmers. Built a 47-table PostgreSQL schema, FastAPI backend, React Native farmer app, admin dashboard, field agent app with offline support, and a federated government portal.
+        </p>
+        <div class="project-tags">
+          <span class="tag">FastAPI</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">React Native</span>
+          <span class="tag">AgriStack</span>
+          <span class="tag">Federated nodes</span>
+          <span class="tag">WhatsApp-first UX</span>
+        </div>
+        <a href="https://github.com/AbhinavRajput-Ag/Prithvi" class="project-link" target="_blank">
+          View on GitHub <span class="project-link-arrow">→</span>
+        </a>
+      </div>
+      <div class="featured-visual">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <circle cx="20" cy="20" r="18" stroke="#2d5a3d" stroke-width="1.5"/>
+          <path d="M20 8 L20 32 M8 20 L32 20" stroke="#2d5a3d" stroke-width="1"/>
+          <circle cx="20" cy="20" r="4" fill="#2d5a3d"/>
+        </svg>
+        prithvi-s41b.onrender.com
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card">
+      <div class="project-meta">
+        <span class="project-domain">Domain</span>
+        <span class="project-year">Year</span>
+      </div>
+      <h3>Project Name</h3>
+      <p>A brief description of what this project does, the problem it solves, and who it's for. Keep it focused and direct.</p>
+      <div class="project-tags">
+        <span class="tag">tech stack</span>
+        <span class="tag">tools used</span>
+      </div>
+      <a href="#" class="project-link">View project <span class="project-link-arrow">→</span></a>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-card">
+      <div class="project-meta">
+        <span class="project-domain">Domain</span>
+        <span class="project-year">Year</span>
+      </div>
+      <h3>Project Name</h3>
+      <p>A brief description of what this project does, the problem it solves, and who it's for. Keep it focused and direct.</p>
+      <div class="project-tags">
+        <span class="tag">tech stack</span>
+        <span class="tag">tools used</span>
+      </div>
+      <a href="#" class="project-link">View project <span class="project-link-arrow">→</span></a>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header fade-in">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Contact</h2>
+  </div>
+  <div class="contact-wrap fade-in">
+    <div class="contact-text">
+      <h2>Let's build<br><em style="font-style:italic; color: var(--muted);">something.</em></h2>
+      <p>Open to collaborations, conversations about public tech, agritech, or anything interesting you're working on.</p>
+      <a href="mailto:your@email.com" class="contact-email">your@email.com</a>
+    </div>
+    <div class="socials">
+      <a href="https://github.com/AbhinavRajput-Ag" class="social-row" target="_blank">
+        <span class="social-name">GitHub</span>
+        <span class="social-handle">AbhinavRajput-Ag →</span>
+      </a>
+      <a href="https://linkedin.com/in/yourhandle" class="social-row" target="_blank">
+        <span class="social-name">LinkedIn</span>
+        <span class="social-handle">yourhandle →</span>
+      </a>
+      <a href="https://twitter.com/yourhandle" class="social-row" target="_blank">
+        <span class="social-name">Twitter / X</span>
+        <span class="social-handle">@yourhandle →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Abhinav Rajput · Bhopal, India</p>
+  <p>Built from scratch · 2025</p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
